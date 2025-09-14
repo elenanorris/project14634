@@ -1,4 +1,4 @@
-# project1
+# Project 1
 The purpose of part I is to accept input from the user and parse the string into tokens. After the tokens are created, it should then store them in fileds of Param class. It should print the contents of the fields only when shell is started with debug. You enter the shell using ./myshell -Debug. Inside the shell you provide information and commands as the user
 
 parse.hpp and param.hpp are the header files for parse.cpp and param.cpp
