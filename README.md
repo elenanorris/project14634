@@ -8,3 +8,5 @@ The makefile has what is necessary to run the program.
 Parse.cpp takes in user provided information and parses it into the tokens in the param class. It also increments argumentCount and resets it as needed.
 
 Param.cpp copies the information that is tokenized and sets them as arguments in order to print in printParams().
+
+MyShell.cpp is just basic and allows for input of information and uses Param.cpp and Parse.cpp to take it and save it. It then prints out the information.
