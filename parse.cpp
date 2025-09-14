@@ -9,7 +9,7 @@ Zolfghari
 #include "parse.hpp" //include header file
 #include "param.hpp" //include param header file
 
-using namespace std;
+using namespace std; 
 
 //main function to parse the input and put it into the Parameter objects
 void parseInput(const char *input, Param &param) {

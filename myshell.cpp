@@ -13,7 +13,7 @@ int main(int argumentCount, char *arguments[]) {
 
     string inputLine;
     while(true) {
-        cout << "myshell >>>";
+        cout << "myshell >>>"; //gets the input
         if (!getline(cin, inputLine)) {
             break; //error or end of file
         }
@@ -28,6 +28,6 @@ int main(int argumentCount, char *arguments[]) {
             param.printParams(); //prints using printParams in param.cpp
         }
     }
-
+ 
     return 0;
 }

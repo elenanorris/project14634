@@ -6,7 +6,7 @@ Professor: Prof. Zolfghari
 */
 
 #ifndef PARAM_HPP
-#define PARAM_HPP
+#define PARAM_HPP 
 
 // max number of tokens that can be parsed on the command line
 const int MAXARGS = 32;        // runtime constant

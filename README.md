@@ -9,4 +9,4 @@ Parse.cpp takes in user provided information and parses it into the tokens in th
 
 Param.cpp copies the information that is tokenized and sets them as arguments in order to print in printParams().
 
-MyShell.cpp is just basic and allows for input of information and uses Param.cpp and Parse.cpp to take it and save it. It then prints out the information.
+MyShell.cpp is just basic and allows for input of information and uses Param.cpp and Parse.cpp to take it and save it. It then prints out the information. 
