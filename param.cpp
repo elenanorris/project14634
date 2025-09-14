@@ -22,9 +22,9 @@ Param::Param() {
 
 Param::Param(char* inRedir, char* outRedir, int bkGr, int argCount) {
 	inputRedirect = inRedir ? strdup(inRedir) : nullptr ;
-	if (inputRedirect) {
+	/*if (inputRedirect) {
 		strcpy(inputRedirect, inRedir);
-	}
+	}*/
 
 	outputRedirect = outRedir ? strdup(outRedir) : nullptr;
 	if (outputRedirect) {
@@ -108,7 +108,7 @@ Param & Param::operator=(const Param &object) { // [4]
 
 	if (object.outputRedirect) {
 		outputRedirect = new char[strlen(object.outputRedirect) + 1];
-		strcpy(outputRedirect, object.outputtRedirect);
+		strcpy(outputRedirect, object.outputRedirect);
 	}
 	else {
 		outputRedirect = nullptr;
