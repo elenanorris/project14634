@@ -27,7 +27,7 @@ int main(int argumentCount, char *arguments[]) {
         if (inDebug) {
             param.printParams(); //prints using printParams in param.cpp
         }
-    }
+    } 
  
     return 0;
 }
