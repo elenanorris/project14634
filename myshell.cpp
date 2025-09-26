@@ -19,7 +19,8 @@ int main(int argumentCount, char *arguments[]) {
         }
 
         if (inputLine == "exit") { //exits the shell if input is "exit"
-            break; //leaves the shell
+            while (waitpid(-1, nullptr, WNOHANG) >0);
+            break;
         }
 
         Param param; //makes a param object
@@ -27,7 +28,48 @@ int main(int argumentCount, char *arguments[]) {
         if (inDebug) {
             param.printParams(); //prints using printParams in param.cpp
         }
-    } 
+
+        if (param.getArgumentCount() == 0) {
+            continue;
+        }
+
+        pid_t pid = fork();
+
+        if (pid < 0) {
+            cerr << "Fork failure" << endl;
+            continue;
+        }
+
+        else if (pid == 0) {
+            if (param.getInputRedirect()) {
+                if (!freopen(param.getInputRedirect(), "r", stdin)) {
+                    cerr << "Input redirect failure" << endl;
+                    exit(1);
+                }
+            }
+
+            if (param.getOutputRedirect()) {
+                if (!freopen(param.getOutputRedirect(), "r", stdin)) {
+                    cerr << "Output redirect failure" << endl;
+                    exit(1);
+                }
+            }
+
+            //space for executing the commands
+        }
+
+        else {
+            if (!param.getBackground()) {
+                waitpid(pid, nullptr, 0);
+            }
+            else {
+                cout << "Background process pid " << pid << endl;
+            }
+
+            while (waitpid(-1, nullptr, WNOHANG) > 0);
+        }
  
+    }    
+    
     return 0;
 }
