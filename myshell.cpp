@@ -29,13 +29,11 @@ int main(int argumentCount, char* arguments[]) {
         }
 
         if (inputLine == "exit") { //exits the shell if input is "exit"
-<<<<<<< HEAD
             while (waitpid(-1, nullptr, WNOHANG) > 0); // reaps any finished child processes to avoid zombies
             break; // breaks while loop to exit shell
-=======
+
             while (waitpid(-1, nullptr, WNOHANG) >0);
             break;
->>>>>>> dc0f18b67199c9625b267e02f0401807589f4982
         }
 
         Param param; //makes a param object
@@ -44,7 +42,6 @@ int main(int argumentCount, char* arguments[]) {
             param.printParams(); //prints using printParams in param.cpp
         }
 
-<<<<<<< HEAD
         if (param.getArgumentCount() == 0) { // no command is ran, so continues the loop
             continue;
         }
@@ -52,7 +49,6 @@ int main(int argumentCount, char* arguments[]) {
         pid_t pid = fork(); // creates a child process
 
         if (pid < 0) { // fork() fails to create a child process
-=======
         if (param.getArgumentCount() == 0) {
             continue;
         }
@@ -60,12 +56,10 @@ int main(int argumentCount, char* arguments[]) {
         pid_t pid = fork();
 
         if (pid < 0) {
->>>>>>> dc0f18b67199c9625b267e02f0401807589f4982
             cerr << "Fork failure" << endl;
             continue;
         }
 
-<<<<<<< HEAD
 
         if (pid == 0) { // child process branch
 
@@ -73,18 +67,15 @@ int main(int argumentCount, char* arguments[]) {
                 if (!freopen(param.getInputRedirect(), "r", stdin)) { // if the process cannot read the file, it cannot redirect input  
                     cerr << "Input redirect failure" << endl;
                     _Exit(1); // program is terminated immediately without performing any cleanup tasks [2]
-=======
         else if (pid == 0) {
             if (param.getInputRedirect()) {
                 if (!freopen(param.getInputRedirect(), "r", stdin)) {
                     cerr << "Input redirect failure" << endl;
                     exit(1);
->>>>>>> dc0f18b67199c9625b267e02f0401807589f4982
                 }
             }
 
             if (param.getOutputRedirect()) {
-<<<<<<< HEAD
                 if (!freopen(param.getOutputRedirect(), "w", stdout)) { // sees if it can write the file to another file as an output
                     cerr << "Output redirect failure" << endl;
                     _Exit(1); // _Exit() avoids flushing parent's stdio buffers [2]
@@ -126,7 +117,6 @@ int main(int argumentCount, char* arguments[]) {
 
         else {
             if (!param.getBackground()) { // if the command is not a background command, then the parent waits for children to finish
-=======
                 if (!freopen(param.getOutputRedirect(), "r", stdin)) {
                     cerr << "Output redirect failure" << endl;
                     exit(1);
@@ -138,26 +128,22 @@ int main(int argumentCount, char* arguments[]) {
 
         else {
             if (!param.getBackground()) {
->>>>>>> dc0f18b67199c9625b267e02f0401807589f4982
                 waitpid(pid, nullptr, 0);
             }
             else {
                 cout << "Background process pid " << pid << endl;
             }
 
-<<<<<<< HEAD
             while (waitpid(-1, nullptr, WNOHANG) > 0); // parent processes loops this to reap any other finished children processes
         }
 
     }
 
-=======
             while (waitpid(-1, nullptr, WNOHANG) > 0);
         }
  
     }    
     
->>>>>>> dc0f18b67199c9625b267e02f0401807589f4982
     return 0;
 }
 /*
