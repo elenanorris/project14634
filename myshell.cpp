@@ -31,9 +31,6 @@ int main(int argumentCount, char* arguments[]) {
         if (inputLine == "exit") { //exits the shell if input is "exit"
             while (waitpid(-1, nullptr, WNOHANG) > 0); // reaps any finished child processes to avoid zombies
             break; // breaks while loop to exit shell
-
-            while (waitpid(-1, nullptr, WNOHANG) >0);
-            break;
         }
 
         Param param; //makes a param object
@@ -49,13 +46,6 @@ int main(int argumentCount, char* arguments[]) {
         pid_t pid = fork(); // creates a child process
 
         if (pid < 0) { // fork() fails to create a child process
-        if (param.getArgumentCount() == 0) {
-            continue;
-        }
-
-        pid_t pid = fork();
-
-        if (pid < 0) {
             cerr << "Fork failure" << endl;
             continue;
         }
@@ -67,11 +57,6 @@ int main(int argumentCount, char* arguments[]) {
                 if (!freopen(param.getInputRedirect(), "r", stdin)) { // if the process cannot read the file, it cannot redirect input  
                     cerr << "Input redirect failure" << endl;
                     _Exit(1); // program is terminated immediately without performing any cleanup tasks [2]
-        else if (pid == 0) {
-            if (param.getInputRedirect()) {
-                if (!freopen(param.getInputRedirect(), "r", stdin)) {
-                    cerr << "Input redirect failure" << endl;
-                    exit(1);
                 }
             }
 
@@ -117,17 +102,6 @@ int main(int argumentCount, char* arguments[]) {
 
         else {
             if (!param.getBackground()) { // if the command is not a background command, then the parent waits for children to finish
-                if (!freopen(param.getOutputRedirect(), "r", stdin)) {
-                    cerr << "Output redirect failure" << endl;
-                    exit(1);
-                }
-            }
-
-            //space for executing the commands
-        }
-
-        else {
-            if (!param.getBackground()) {
                 waitpid(pid, nullptr, 0);
             }
             else {
@@ -139,11 +113,6 @@ int main(int argumentCount, char* arguments[]) {
 
     }
 
-            while (waitpid(-1, nullptr, WNOHANG) > 0);
-        }
- 
-    }    
-    
     return 0;
 }
 /*
