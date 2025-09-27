@@ -93,7 +93,7 @@ int main(int argumentCount, char* arguments[]) {
 
             // executing the UNIX command
             if (execvp(argv[0], argv.data()) == -1) { // [4] .data() returns a pointer to the memory array used internally by the "argv" vector to store its owned elements
-                cerr << "execvp failed" < endl;
+                cerr << "execvp failed" << endl;
                 _Exit(1); // execvp() failed, so immediately kill child made by "fork()" with error code
             }
             // otherwise, execvp() executes the UNIX command, replaces child node, and code below never runs
