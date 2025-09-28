@@ -92,12 +92,18 @@ int main(int argumentCount, char* arguments[]) {
             }
 
             // executing the UNIX command
-            if (execvp(argv[0], argv.data()) == -1) { // [4] .data() returns a pointer to the memory array used internally by the "argv" vector to store its owned elements
-                cerr << "execvp failed" << endl;
-                _Exit(1); // execvp() failed, so immediately kill child made by "fork()" with error code
+            // If argv[0] contains a '/', treat it as a path and call execv;
+            // otherwise, use execvp to search PATH
+            if (strchr(argv[0], '/') != nullptr) {
+                execv(argv[0], argv.data());    // returns only on failure
+                cerr << "execv failed" << endl;
+                _Exit(1);
             }
-            // otherwise, execvp() executes the UNIX command, replaces child node, and code below never runs
-
+            else {
+                execvp(argv[0], argv.data()); // returns only on failure
+                cerr << "execvp failed" << endl;
+                _Exit(1);
+            }
         }
 
         else {
